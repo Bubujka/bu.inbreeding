@@ -9,7 +9,19 @@ function unyaml_file($file){
 }
 
 function tree($n){
-	return unyaml_file('trees/'.$n.'.yaml');
+	$raw_tree = unyaml_file('trees/'.$n.'.yaml');
+	return mktree(null, $raw_tree);
+}
+
+function mktree($top, $tree){
+	$node = node();
+	$node->self = $tree['name'];
+	$node->top = $top;
+	if(isset($tree['mother']))
+		$node->left = mktree($node, $tree['mother']);
+	if(isset($tree['father']))
+		$node->right = mktree($node, $tree['father']);
+	return $node;
 }
 
 class Node{
@@ -17,6 +29,10 @@ class Node{
 	var $right;
 	var $top;
 	var $self;
+}
+
+function p($wtf){
+	echo $wtf."\n";
 }
 
 function node(){
