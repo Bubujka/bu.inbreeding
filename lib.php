@@ -11,3 +11,14 @@ function unyaml_file($file){
 function tree($n){
 	return unyaml_file('trees/'.$n.'.yaml');
 }
+
+class Node{
+	var $left;
+	var $right;
+	var $top;
+	var $self;
+}
+
+function node(){
+	return new Node;
+}
