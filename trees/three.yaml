@@ -1,0 +1,61 @@
+name:   Царица
+father:
+  name: Лорд
+  father:
+    name: Сампан
+    father:
+      name: Кримсон
+      father:
+        name: Кангу
+      mother:
+        name: Чизкейк
+    mother:
+      name: Чарнушка
+      father:
+        name: Тамбливид
+      mother:
+        name: Олан
+  mother:
+    name: Джоконда
+    father:
+      name: Зулус
+      father:
+        name: Пахлави
+      mother:
+        name: Пенисилина
+    mother:
+      name: Эскапада
+      father:
+        name: Банат
+      mother:
+        name: Эуниче
+mother:
+  name: Полина
+  father:
+    name: Сампан
+    father:
+      name: Кримсон
+      father:
+        name: Кангу
+      mother:
+        name: Чизкейк
+    mother:
+      name: Чарнушка
+      father:
+        name: Тамливид
+      mother:
+        name: Олан
+  mother:
+    name: Саси
+    father:
+      name: Кримсон
+      father:
+        name: Кангу
+      mother:
+        name: Чизкейк
+    mother:
+      name: Бандама
+      father:
+        name: Мэпл Сирап
+      mother:
+        name: Бандола

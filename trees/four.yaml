@@ -1,0 +1,61 @@
+name:   Горциза
+father:
+  name: Мастер Кард
+  father:
+    name: Груби
+    father:
+      name: Кримсон
+      father:
+        name: Кангу
+      mother:
+        name: Чизкейк
+    mother:
+      name: Мамона
+      father:
+        name: Сиавулф
+      mother:
+        name: Бандама
+  mother:
+    name: Валакуента
+    father:
+      name: Пичур 
+      father:
+        name: Диномит
+      mother:
+        name: Плиза
+    mother:
+      name: Германика
+      father:
+        name: Кримсон
+      mother:
+        name: Бандама
+mother:
+  name: Циниа
+  father:
+    name: Груби
+    father:
+      name: Кримсон
+      father:
+        name: Кангу
+      mother:
+        name: Чизкейк
+    mother:
+      name: Мамона
+      father:
+        name: Сиавулф
+      mother:
+        name: Бандама
+  mother:
+    name: Крестарс
+    father:
+      name: Аттракшин
+      father:
+        name: бландора
+      mother:
+        name: Оптикал
+    mother:
+      name: Ромпфорд
+      father:
+        name: Фриспирит
+      mother:
+        name: Пони

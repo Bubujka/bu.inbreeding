@@ -1,0 +1,61 @@
+name:   Рита
+father:
+  name: Сампан
+  father:
+    name: Кримсон
+    father:
+      name: Кангу
+      father:
+        name: Тамбливид
+      mother:
+        name: Дикерсон
+    mother:
+      name: Чизкейк
+      father:
+        name: Мэпл Сирап
+      mother:
+        name: Траффл
+  mother:
+    name: Чарнушка
+    father:
+      name: Тамбливид
+      father:
+        name: Битл Джус
+      mother:
+        name: Пандемониум
+    mother:
+      name: олан
+      father:
+        name: Битл Джус
+      mother:
+        name: Кендра
+mother:
+  name: Сапфира
+  father:
+    name: Ангор
+    father:
+      name: Пахлави
+      father:
+        name: Ксерокс
+      mother:
+        name: тирамису
+    mother:
+      name: Палвиспу
+      father:
+        name: Комет
+      mother:
+        name: Балайка
+  mother:
+    name: Файр
+    father:
+      name: Эдмонд
+      father:
+        name: Сампан
+      mother:
+        name: Эмили
+    mother:
+      name: Барбарис
+      father:
+        name: Ангор
+      mother:
+        name: Асти
