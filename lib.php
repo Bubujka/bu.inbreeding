@@ -1,5 +1,6 @@
 <?php
 require 'spyc.php';
+
 function unyaml($string){
 	return Spyc::YAMLLoadString($string);
 }
@@ -22,6 +23,28 @@ function mktree($top, $tree){
 	if(isset($tree['father']))
 		$node->right = mktree($node, $tree['father']);
 	return $node;
+}
+
+function to_1d($tree){
+	$left = array();
+	$right = array();
+
+	if($tree->left)
+		$left = to_1d($tree->left);
+	if($tree->right)
+		$right = to_1d($tree->right);
+	return array_merge(array($tree), $left, $right);
+}
+
+function find_dups($tree){
+	$dups = array();
+	foreach(to_1d($tree) as $node)
+		$dups[$node->self][] = $node;
+	foreach($dups as $k=>$v)
+		if(count($v) == 1)
+			unset($dups[$k]);
+	ksort($dups);
+	return $dups;
 }
 
 class Node{
