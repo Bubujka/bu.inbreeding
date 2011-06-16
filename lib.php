@@ -88,6 +88,7 @@ function nearest_common_node(){
 
 function calc_imbriding($tree){
 	$dups = find_dups($tree);
+
 	//	foreach(
 
 	//$k = (0.5 * pow(0.5, calc_distance(nearest_common_node($tree, array_shift($dups))))) * 100;
@@ -95,7 +96,58 @@ function calc_imbriding($tree){
 	return array(array('node'=>$tree,
 			   'num'=>$k));
 }
+
 function print_imbriding($data){
 	foreach($data as $v)
 		echo $v['node']->self." - ".$v['num']."\n";
 }
+
+function remove_dup_parents($dups){
+	foreach($dups as $k=>$v){
+		foreach($v as $kk=>$vv){
+			if(isset($dups[$vv->top->self]))
+				unset($dups[$k][$kk]);
+		}
+	}
+
+	foreach($dups as $k=>$v)
+		if(!count($v))
+			unset($dups[$k]);
+
+	return $dups;
+}
+
+function find_nearest_pair($dups, $dog){
+	$variants = $dups[$dog->self];
+	foreach($variants as $k=>$v){
+		if($v->top->self == $dog->top->self)
+			continue;
+		$dog_parent = $dog->top;
+
+		$candidate = $v;
+
+		while($dog_parent){
+			$candidate_parent = $v->top;
+			while($candidate_parent){
+				if($candidate_parent->self == $dog_parent->self)
+					return $candidate;
+				$candidate_parent = $candidate_parent->top;
+			}
+			$dog_parent = $dog_parent->top;
+		}
+	}
+}
+
+function fill_with_missed_pair($dups, $cleared_dups){
+	foreach($cleared_dups as $k=>$v)
+		if(count($v) == 1)
+			$cleared_dups[$k][] = find_nearest_pair($dups, reset($v));
+	return $cleared_dups;
+}
+
+function find_meaningful_dups($tree){
+	$dups = find_dups($tree);
+	$cleared_dups = remove_dup_parents($dups);
+	return fill_with_missed_pair($dups, $cleared_dups);
+}
+
