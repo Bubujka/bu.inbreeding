@@ -54,6 +54,17 @@ class Node{
 	var $self;
 }
 
+class Triform{
+	var $car;
+	var $cdr;
+	var $top;
+}
+
+
+function triform(){
+	return new Triform;
+}
+
 function p($wtf){
 	echo $wtf."\n";
 }
@@ -82,14 +93,9 @@ function calc_distance($tree, $dups){
 	return $i;
 }
 
-function nearest_common_node(){
-
-}
 
 function calc_imbriding($tree){
-	$dups = find_dups($tree);
-
-	//	foreach(
+	$dups = find_meaningful_dups($tree);
 
 	//$k = (0.5 * pow(0.5, calc_distance(nearest_common_node($tree, array_shift($dups))))) * 100;
 
@@ -150,4 +156,5 @@ function find_meaningful_dups($tree){
 	$cleared_dups = remove_dup_parents($dups);
 	return fill_with_missed_pair($dups, $cleared_dups);
 }
+
 
