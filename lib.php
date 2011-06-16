@@ -93,10 +93,25 @@ function calc_distance($tree, $dups){
 	return $i;
 }
 
+function find_common_node($f, $s){
+	$dog = $f;
+
+	$dog_parent = $f->top;
+	$candidate = $s;
+
+	while($dog_parent){
+		$candidate_parent = $s->top;
+		while($candidate_parent){
+			if($candidate_parent->self == $dog_parent->self)
+				return $candidate_parent;
+			$candidate_parent = $candidate_parent->top;
+		}
+		$dog_parent = $dog_parent->top;
+	}
+}
 
 function calc_imbriding($tree){
 	$dups = find_meaningful_dups($tree);
-
 	//$k = (0.5 * pow(0.5, calc_distance(nearest_common_node($tree, array_shift($dups))))) * 100;
 
 	return array(array('node'=>$tree,
