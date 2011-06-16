@@ -94,24 +94,38 @@ function calc_distance($tree, $dups){
 }
 
 function find_common_node($f, $s){
-	$dog = $f;
-
 	$dog_parent = $f->top;
-	$candidate = $s;
 
 	while($dog_parent){
+
 		$candidate_parent = $s->top;
+
 		while($candidate_parent){
 			if($candidate_parent->self == $dog_parent->self)
 				return $candidate_parent;
+
 			$candidate_parent = $candidate_parent->top;
 		}
 		$dog_parent = $dog_parent->top;
 	}
+
+}
+
+function hr(){
+	p('-------------------------');
+}
+function pr($v){
+	p('self: '.$v->self);
+	p('top: '.$v->top->self);
+	p("__");
+}
+function pak($arr){
+	print_R(array_keys($arr));
 }
 
 function calc_imbriding($tree){
 	$dups = find_meaningful_dups($tree);
+
 	$return = array();
 	$grouped = array();
 	foreach($dups as $dup){
@@ -164,23 +178,28 @@ function remove_dup_parents($dups){
 
 function find_nearest_pair($dups, $dog){
 	$variants = $dups[$dog->self];
+
+	$candidates = array();
 	foreach($variants as $k=>$v){
 		if($v->top->self == $dog->top->self)
 			continue;
 		$dog_parent = $dog->top;
 
 		$candidate = $v;
-
+		$level = 0;
 		while($dog_parent){
 			$candidate_parent = $v->top;
 			while($candidate_parent){
-				if($candidate_parent->self == $dog_parent->self)
-					return $candidate;
+				if($candidate_parent === $dog_parent)
+					$candidates[$level] = $candidate;
 				$candidate_parent = $candidate_parent->top;
 			}
+			$level++;
 			$dog_parent = $dog_parent->top;
 		}
 	}
+	ksort($candidates);
+	return reset($candidates);
 }
 
 function fill_with_missed_pair($dups, $cleared_dups){
