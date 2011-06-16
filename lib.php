@@ -112,10 +112,34 @@ function find_common_node($f, $s){
 
 function calc_imbriding($tree){
 	$dups = find_meaningful_dups($tree);
-	//$k = (0.5 * pow(0.5, calc_distance(nearest_common_node($tree, array_shift($dups))))) * 100;
+	$return = array();
+	$grouped = array();
+	foreach($dups as $dup){
+		$top = find_common_node(reset($dup), end($dup));
+		$grouped[$top->self]['top'] = $top;
+		$grouped[$top->self]['dups'][] = $dup;
+	}
 
-	return array(array('node'=>$tree,
-			   'num'=>$k));
+
+	foreach($grouped as $v){
+		$top = $v['top'];
+		$dups = $v['dups'];
+
+		if(count($dups) == 1){
+			$pk = pow(0.5, calc_distance($top, reset($dups)));
+
+		}else{
+			$pk = 0;
+			foreach($dups as $vv)
+				$pk += pow(0.5, calc_distance($top, $vv));
+		}
+		$k = (0.5 * $pk) * 100;
+		$return[] = array('node'=>$top, 'num'=>$k);
+	}
+
+
+
+	return $return;
 }
 
 function print_imbriding($data){
