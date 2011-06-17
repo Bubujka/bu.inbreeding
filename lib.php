@@ -66,6 +66,30 @@ class Node{
 			($this->left ? $this->left->self :'null').":".
 			($this->right ? $this->right->self :'null').">";
 	}
+
+	function search($path){
+		$t = array_reverse(explode(">", $path));
+		$first = array_shift($t);
+		$candidates = $this->all($first);
+		foreach($candidates as $candidate){
+			$parent = $candidate->top;
+			foreach($t as $v){
+				if($parent->self != $v)
+					continue 2;
+				$parent = $parent->top;
+			}
+			return $candidate;
+		}
+	}
+
+	function all($name){
+		$r = array();
+		if($this->self == $name)
+			$r[] = $this;
+		return array_merge($r,
+				   ($this->left ? $this->left->all($name) : array()),
+				   ($this->right ? $this->right->all($name) : array()));
+	}
 }
 
 class Triform{
@@ -128,11 +152,13 @@ function find_common_node($f, $s){
 function hr(){
 	p('-------------------------');
 }
+
 function pr($v){
 	p('self: '.$v->self);
 	p('top: '.$v->top->self);
 	p("__");
 }
+
 function pak($arr){
 	print_R(array_keys($arr));
 }
