@@ -52,6 +52,20 @@ class Node{
 	var $right;
 	var $top;
 	var $self;
+	var $uid;
+	function __construct($self=null){
+		static $i = 0;
+		$i++;
+		$this->uid = $i;
+		$this->self = $self;
+	}
+
+	function __toString(){
+		return "<".$this->self.":".
+			($this->top ? $this->top->self :'null').":".
+			($this->left ? $this->left->self :'null').":".
+			($this->right ? $this->right->self :'null').">";
+	}
 }
 
 class Triform{
@@ -69,8 +83,8 @@ function p($wtf){
 	echo $wtf."\n";
 }
 
-function node(){
-	return new Node;
+function node($self = null){
+	return new Node($self);
 }
 
 function calc_distance($tree, $dups){
