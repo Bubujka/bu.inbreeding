@@ -148,9 +148,9 @@ function calc_imbriding($tree){
 				$pk += pow(0.5, calc_distance($top, $vv));
 		}
 		$k = (0.5 * $pk) * 100;
-		$return[] = array('node'=>$top, 'num'=>$k);
+		$return[$top->self] = array('node'=>$top, 'num'=>$k);
 	}
-
+	ksort($return);
 
 
 	return $return;
