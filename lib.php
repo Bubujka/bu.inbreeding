@@ -90,6 +90,12 @@ class Node{
 				   ($this->left ? $this->left->all($name) : array()),
 				   ($this->right ? $this->right->all($name) : array()));
 	}
+
+	function to_1d(){
+		return array_merge(array($this),
+				   ($this->left ? $this->left->to_1d() : array()),
+				   ($this->right ? $this->right->to_1d() : array()));
+	}
 }
 
 class Triform{
@@ -98,6 +104,42 @@ class Triform{
 	var $top;
 }
 
+function triforms($tree){
+	$return = array();
+	$grouped = array();
+	foreach($tree->to_1d() as $v)
+		$grouped[$v->self][] = $v;
+
+	foreach($grouped as $k=>$v)
+		if(count($v) == 1)
+			unset($grouped[$k]);
+
+	foreach($grouped as $v){
+		$t = triform();
+		$t->top = find_common_node(reset($v), end($v));
+		$t->car = reset($v);
+		$t->cdr = end($v);
+		$return[] = $t;
+	}
+
+	return $return;
+}
+
+function top_self($v, $vv){
+	$a = $v->top->self;
+	$b = $vv->top->self;
+	if ($a == $b) {
+		return 0;
+	}
+	return ($a < $b) ? -1 : 1;
+
+}
+
+function print_sort_by_top(){
+	$args = func_get_args();
+	usort($args, 'top_self');
+	echo implode("\n", $args);
+}
 
 function triform(){
 	return new Triform;
