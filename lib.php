@@ -252,7 +252,7 @@ function pak($arr){
 function calc_imbriding($tree){
 	$triforms = triforms($tree);
 	$return = array();
-
+	$skipped = array();
 	$grouped = array();
 	foreach($triforms as $k=>$v)
 		$grouped[$v->top->self][] = $v;
@@ -261,6 +261,11 @@ function calc_imbriding($tree){
 	foreach($grouped as $k=>$v){
 		if(count($v) == 1){
 			$t = reset($v);
+			if(isset($grouped[$t->car->self]) or
+			   isset($grouped[$t->cdr->self])){
+				$skipped[$k] = $v;
+				continue;
+			}
 			$pk = pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
 			$k = (0.5 * $pk) * 100;
 			$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
@@ -270,8 +275,14 @@ function calc_imbriding($tree){
 	foreach($grouped as $k=>$v){
 		if(count($v) != 1){
 			$pk = 0;
-			foreach($v as $t)
+			foreach($v as $t){
+				if(isset($grouped[$t->car->self]) or
+				   isset($grouped[$t->cdr->self])){
+					$skipped[$k] = $v;
+					continue 2;
+				}
 				$pk += pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
+			}
 			$k = (0.5 * $pk) * 100;
 
 			$t = reset($v);
@@ -279,6 +290,21 @@ function calc_imbriding($tree){
 		}
 	}
 
+	foreach($skipped as $k=>$v){
+		$pk = 0;
+		foreach($v as $t){
+			if(isset($grouped[$t->car->self])){
+				$num = ($return[$t->car->self]['num'] / 100) + 1;
+				$pk += (pow(0.5, calc_distance($t->top, $t->car, $t->cdr))) * $num;
+			}
+		}
+
+
+		$k = (0.5 * $pk) * 100;
+		$t = reset($v);
+
+		$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
+	}
 	/*
 	foreach($grouped as $v){
 
