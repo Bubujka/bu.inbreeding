@@ -1,61 +1,61 @@
 name: Шерлок
-father:
+dad:
   name: Груби
-  father:
+  dad:
     name: Кримсон
-    father:
+    dad:
       name: Кангу
-      father:
+      dad:
         name: Тамбливид
-      mother:
+      mom:
         name: Дикерсон
-    mother:
+    mom:
       name: Чbзкейк
-      father:
+      dad:
         name: Мэпл Сирап
-      mother:
+      mom:
         name: Траффл
-  mother:
+  mom:
     name: Мамона
-    father:
+    dad:
       name: Сиавулф
-      father:
+      dad:
         name: Эрик Крисцентмун
-      mother:
+      mom:
         name: Эрик Джинджерис
-    mother:
+    mom:
       name: Бандама
-      father:
+      dad:
         name: Мэпл Сирап
-      mother:
+      mom:
         name: Бандола
-mother:
+mom:
   name: Злата
-  father:
+  dad:
     name: Ангор
-    father:
+    dad:
       name: Пахлави
-      father:
+      dad:
         name: Ксерокс
-      mother:
+      mom:
         name: Тирамису
-    mother:
+    mom:
       name: Палвиспу
-      father:
+      dad:
         name: Комет
-      mother:
+      mom:
         name: Балалайка
-  mother:
+  mom:
     name: Джоконда
-    father:
+    dad:
       name: Зулус
-      father:
+      dad:
         name: Пахлави
-      mother:
+      mom:
         name: Пенисилина
-    mother:
+    mom:
       name: Ескапада
-      father:
+      dad:
         name: Банат
-      mother:
+      mom:
         name: Эуниче

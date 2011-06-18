@@ -1,61 +1,61 @@
 name: Anne
-father:
+dad:
   name: Berd
-  father:
+  dad:
     name: Danay
-    father:
+    dad:
       name: Jiro
-      father:
+      dad:
         name: Neo
-      mother:
+      mom:
         name: Tina
-    mother:
+    mom:
       name: Kate
-      father:
+      dad:
         name: Uros
-      mother:
+      mom:
         name: Winda
-  mother:
+  mom:
     name: Ellis
-    father:
+    dad:
       name: Leon
-      father:
+      dad:
         name: Valli
-      mother:
+      mom:
         name: Zera
-    mother:
+    mom:
       name: Mari
-      father:
+      dad:
         name: Amigo Rea
-      mother:
+      mom:
         name: Blade Er
-mother:
+mom:
   name: Cinia
-  father:
+  dad:
     name: Ford
-    father:
+    dad:
       name: Neo
-      father:
+      dad:
         name: Cinos T
-      mother:
+      mom:
         name: Danaya F
-    mother:
+    mom:
       name: Olga
-      father:
+      dad:
         name: Emil K
-      mother:
+      mom:
         name: Fiona H
-  mother:
+  mom:
     name: Gena
-    father:
+    dad:
       name: Pace
-      father:
+      dad:
         name: Hermes 
-      mother:
+      mom:
         name: Geneva Y
-    mother:
+    mom:
       name: Rita
-      father:
+      dad:
         name: Yaros
-      mother:
+      mom:
         name: Jina L

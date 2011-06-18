@@ -18,10 +18,10 @@ function mktree($top, $tree){
 	$node = node();
 	$node->self = $tree['name'];
 	$node->top = $top;
-	if(isset($tree['mother']))
-		$node->left = mktree($node, $tree['mother']);
-	if(isset($tree['father']))
-		$node->right = mktree($node, $tree['father']);
+	if(isset($tree['mom']))
+		$node->left = mktree($node, $tree['mom']);
+	if(isset($tree['dad']))
+		$node->right = mktree($node, $tree['dad']);
 	return $node;
 }
 
