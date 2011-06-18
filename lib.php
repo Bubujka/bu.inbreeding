@@ -93,6 +93,10 @@ class Triform{
 		$r .= return_sort_by_top($this->car, $this->cdr)."\n\n";
 		return $r;
 	}
+	// pk - ничего не значит. Просто 2 буквы.
+	function pk(){
+		return pow(0.5, calc_distance($this->top, $this->car, $this->cdr));
+	}
 }
 
 function triform(){
@@ -174,16 +178,16 @@ function calc_distance($top, $first, $second){
 	return $i;
 }
 
-function find_common_node($f, $s){
-	$dog_parent = $f->top;
-	while($dog_parent){
-		$candidate_parent = $s->top;
-		while($candidate_parent){
-			if($candidate_parent->self == $dog_parent->self)
-				return $candidate_parent;
-			$candidate_parent = $candidate_parent->top;
+function find_common_node($one, $two){
+	$one_top = $one->top;
+	while($one_top){
+		$two_top = $two->top;
+		while($two_top){
+			if($two_top->uid == $one_top->uid)
+				return $two_top;
+			$two_top = $two_top->top;
 		}
-		$dog_parent = $dog_parent->top;
+		$one_top = $one_top->top;
 	}
 }
 
@@ -203,8 +207,7 @@ function calc_imbriding($tree){
 				$skipped[$k] = $v;
 				continue;
 			}
-			$pk = pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
-			$k = (0.5 * $pk) * 100;
+			$k = (0.5 * $t->pk()) * 100;
 			$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
 		}
 	}
@@ -218,7 +221,7 @@ function calc_imbriding($tree){
 					$skipped[$k] = $v;
 					continue 2;
 				}
-				$pk += pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
+				$pk += $t->pk();
 			}
 			$k = (0.5 * $pk) * 100;
 			$t = reset($v);
@@ -231,7 +234,7 @@ function calc_imbriding($tree){
 		foreach($v as $t){
 			if(isset($grouped[$t->car->self])){
 				$num = ($return[$t->car->self]['num'] / 100) + 1;
-				$pk += (pow(0.5, calc_distance($t->top, $t->car, $t->cdr))) * $num;
+				$pk += $t->pk() * $num;
 			}
 		}
 		$k = (0.5 * $pk) * 100;
