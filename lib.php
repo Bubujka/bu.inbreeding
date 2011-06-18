@@ -102,29 +102,75 @@ class Triform{
 	var $car;
 	var $cdr;
 	var $top;
+	function __toString(){
+		$r =  $this->top."\n";
+		$r .= return_sort_by_top($this->car, $this->cdr)."\n\n";
+		return $r;
+	}
+}
+
+function print_triforms($triforms){
+	foreach($triforms as $v){
+		echo $v;
+	}
 }
 
 function triforms($tree){
 	$return = array();
 	$grouped = array();
+
 	foreach($tree->to_1d() as $v)
 		$grouped[$v->self][] = $v;
+
+	$all_pairs = $grouped;
 
 	foreach($grouped as $k=>$v)
 		if(count($v) == 1)
 			unset($grouped[$k]);
 
+	foreach($grouped as $k=>$v){
+		foreach($v as $kk=>$vv){
+			if(isset($grouped[$vv->top->self]))
+				unset($grouped[$k][$kk]);
+		}
+	}
+
+	foreach($grouped as $k=>$v){
+		if(!count($v))
+			unset($grouped[$k]);
+	}
+
+	foreach($grouped as $k=>$v){
+		if(count($v) == 2){
+			unset($grouped[$k]);
+			$grouped[$k][] = pair(reset($v), end($v));
+		}elseif(count($v) == 1){
+			unset($grouped[$k]);
+			$node = reset($v);
+			foreach($all_pairs[$k] as $kk=>$vv){
+				if($vv->uid != $node->uid){
+					$grouped[$k][] = pair($node, $vv);
+				}
+			}
+		}
+	}
+
 	foreach($grouped as $v){
-		$t = triform();
-		$t->top = find_common_node(reset($v), end($v));
-		$t->car = reset($v);
-		$t->cdr = end($v);
-		$return[] = $t;
+		foreach($v as $vv){
+			$t = triform();
+			$t->top = find_common_node(reset($vv), end($vv));
+			$t->car = reset($vv);
+			$t->cdr = end($vv);
+			$return[] = $t;
+		}
 	}
 
 	return $return;
 }
 
+function pair($one, $two){
+	return array($one, $two);
+}
 function top_self($v, $vv){
 	$a = $v->top->self;
 	$b = $vv->top->self;
@@ -135,10 +181,10 @@ function top_self($v, $vv){
 
 }
 
-function print_sort_by_top(){
+function return_sort_by_top(){
 	$args = func_get_args();
 	usort($args, 'top_self');
-	echo implode("\n", $args);
+	return implode("\n", $args);
 }
 
 function triform(){

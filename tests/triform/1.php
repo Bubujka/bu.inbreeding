@@ -1,8 +1,5 @@
 <?php
-$t = triforms(tree(1));
-$t = reset($t);
-echo $t->top."\n";
-print_sort_by_top($t->car, $t->cdr);
+print_triforms(triforms(tree(1)));
 ---
 <Anne:null:Cinia:Berd>
 <Neo:Ford:Danaya F:Cinos T>
