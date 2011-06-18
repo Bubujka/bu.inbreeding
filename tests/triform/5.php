@@ -1,6 +1,6 @@
 <?php
-$tf = triforms(tree(3));
+$tf = triforms(tree(5));
 #print_triforms($tf);
 echo count($tf);
 ---
-3
+4

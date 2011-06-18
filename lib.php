@@ -199,19 +199,17 @@ function node($self = null){
 	return new Node($self);
 }
 
-function calc_distance($tree, $dups){
+function calc_distance($top, $first, $second){
 	$i = 0;
 
-	$first = array_shift($dups);
-	$second = array_shift($dups);
 	$p = $first->top;
-	while($p->self != $tree->self){
+	while($p->self != $top->self){
 		$i++;
 		$p = $p->top;
 	}
 
 	$p = $second->top;
-	while($p->self != $tree->self){
+	while($p->self != $top->self){
 		$i++;
 		$p = $p->top;
 	}
@@ -252,20 +250,37 @@ function pak($arr){
 }
 
 function calc_imbriding($tree){
-	$dups = find_meaningful_dups($tree);
-
+	$triforms = triforms($tree);
 	$return = array();
+
 	$grouped = array();
-	foreach($dups as $dup){
-		$top = find_common_node(reset($dup), end($dup));
-		$grouped[$top->self]['top'] = $top;
-		$grouped[$top->self]['dups'][] = $dup;
+	foreach($triforms as $k=>$v)
+		$grouped[$v->top->self][] = $v;
+
+
+	foreach($grouped as $k=>$v){
+		if(count($v) == 1){
+			$t = reset($v);
+			$pk = pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
+			$k = (0.5 * $pk) * 100;
+			$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
+		}
 	}
 
+	foreach($grouped as $k=>$v){
+		if(count($v) != 1){
+			$pk = 0;
+			foreach($v as $t)
+				$pk += pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
+			$k = (0.5 * $pk) * 100;
 
+			$t = reset($v);
+			$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
+		}
+	}
+
+	/*
 	foreach($grouped as $v){
-		$top = $v['top'];
-		$dups = $v['dups'];
 
 		if(count($dups) == 1){
 			$pk = pow(0.5, calc_distance($top, reset($dups)));
@@ -275,12 +290,10 @@ function calc_imbriding($tree){
 			foreach($dups as $vv)
 				$pk += pow(0.5, calc_distance($top, $vv));
 		}
-		$k = (0.5 * $pk) * 100;
-		$return[$top->self] = array('node'=>$top, 'num'=>$k);
 	}
+
+	*/
 	ksort($return);
-
-
 	return $return;
 }
 
