@@ -6,8 +6,8 @@ echo $n."\n";
 $n = node();
 $n->self = 'bubujka';
 $n->top = node('t');
-$n->left = node('l');
-$n->right = node('r');
+$n->car = node('l');
+$n->cdr = node('r');
 echo $n;
 ---
 <waserd:null:null:null>

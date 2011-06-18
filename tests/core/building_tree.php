@@ -2,11 +2,11 @@
 $dog = tree(1);
 
 p($dog->self);
-p($dog->right->self);
-p($dog->left->self);
-p($dog->right->top->self);
-p($dog->right->right->self);
-p($dog->right->right->top->top->self);
+p($dog->cdr->self);
+p($dog->car->self);
+p($dog->cdr->top->self);
+p($dog->cdr->cdr->self);
+p($dog->cdr->cdr->top->top->self);
 ---
 Anne
 Berd

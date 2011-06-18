@@ -2,7 +2,6 @@
 foreach(glob('helpers/*') as $v)
 	require_once $v;
 
-
 function top_self($v, $vv){
 	$a = $v->top->self;
 	$b = $vv->top->self;
@@ -10,7 +9,6 @@ function top_self($v, $vv){
 		return 0;
 	}
 	return ($a < $b) ? -1 : 1;
-
 }
 
 function return_sort_by_top(){
@@ -29,15 +27,15 @@ function mktree($top, $tree){
 	$node->self = $tree['name'];
 	$node->top = $top;
 	if(isset($tree['mom']))
-		$node->left = mktree($node, $tree['mom']);
+		$node->car = mktree($node, $tree['mom']);
 	if(isset($tree['dad']))
-		$node->right = mktree($node, $tree['dad']);
+		$node->cdr = mktree($node, $tree['dad']);
 	return $node;
 }
 
 class Node{
-	var $left;
-	var $right;
+	var $car;
+	var $cdr;
 	var $top;
 	var $self;
 	var $uid;
@@ -51,8 +49,8 @@ class Node{
 	function __toString(){
 		return "<".$this->self.":".
 			($this->top ? $this->top->self :'null').":".
-			($this->left ? $this->left->self :'null').":".
-			($this->right ? $this->right->self :'null').">";
+			($this->car ? $this->car->self :'null').":".
+			($this->cdr ? $this->cdr->self :'null').">";
 	}
 
 	function search($path){
@@ -75,14 +73,14 @@ class Node{
 		if($this->self == $name)
 			$r[] = $this;
 		return array_merge($r,
-				   ($this->left ? $this->left->all($name) : array()),
-				   ($this->right ? $this->right->all($name) : array()));
+				   ($this->car ? $this->car->all($name) : array()),
+				   ($this->cdr ? $this->cdr->all($name) : array()));
 	}
 
 	function to_1d(){
 		return array_merge(array($this),
-				   ($this->left ? $this->left->to_1d() : array()),
-				   ($this->right ? $this->right->to_1d() : array()));
+				   ($this->car ? $this->car->to_1d() : array()),
+				   ($this->cdr ? $this->cdr->to_1d() : array()));
 	}
 }
 
@@ -197,7 +195,6 @@ function calc_imbriding($tree){
 	foreach($triforms as $k=>$v)
 		$grouped[$v->top->self][] = $v;
 
-
 	foreach($grouped as $k=>$v){
 		if(count($v) == 1){
 			$t = reset($v);
@@ -224,7 +221,6 @@ function calc_imbriding($tree){
 				$pk += pow(0.5, calc_distance($t->top, $t->car, $t->cdr));
 			}
 			$k = (0.5 * $pk) * 100;
-
 			$t = reset($v);
 			$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
 		}
@@ -238,11 +234,8 @@ function calc_imbriding($tree){
 				$pk += (pow(0.5, calc_distance($t->top, $t->car, $t->cdr))) * $num;
 			}
 		}
-
-
 		$k = (0.5 * $pk) * 100;
 		$t = reset($v);
-
 		$return[$t->top->self] = array('node'=>$t->top, 'num'=>$k);
 	}
 
