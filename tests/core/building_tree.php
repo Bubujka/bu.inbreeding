@@ -1,4 +1,5 @@
 <?php
+function p($w){ echo $w."\n"; }
 $dog = tree(1);
 
 p($dog->self);
