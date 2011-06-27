@@ -1,5 +1,5 @@
 <?php
-print_imbriding(calc_imbriding(tree(4)));
+print_inbreeding(calc_inbreeding(tree(4)));
 ---
 Горциза - 14.84375
 Мастер Кард - 9.375

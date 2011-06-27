@@ -1,6 +1,6 @@
 <?php
 
-function print_imbriding($data){
+function print_inbreeding($data){
 	foreach($data as $v)
 		echo $v['node']->self." - ".$v['num']."\n";
 }

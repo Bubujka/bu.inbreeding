@@ -191,7 +191,7 @@ function find_common_node($one, $two){
 	}
 }
 
-function calc_imbriding($tree){
+function calc_inbreeding($tree){
 	$triforms = triforms($tree);
 	$return = array();
 	$skipped = array();
