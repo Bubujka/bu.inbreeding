@@ -1,5 +1,5 @@
 <?php
-require 'spyc.php';
+require __DIR__.'/../spyc.php';
 
 function unyaml($string){
 	return Spyc::YAMLLoadString($string);
