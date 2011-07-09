@@ -1,0 +1,30 @@
+
+name: 1711
+dad: 
+  name: 1724
+  dad: 
+    name: 1726
+    dad: 
+      name: 2101
+    mom: 
+      name: 2100
+  mom: 
+    name: 1725
+    dad: 
+      name: 2099
+    mom: 
+      name: 2098
+mom: 
+  name: 1727
+  dad: 
+    name: 2103
+    dad: 
+      name: 2101
+    mom: 
+      name: 6737
+  mom: 
+    name: 2102
+    dad: 
+      name: 6734
+    mom: 
+      name: 2098
