@@ -1,0 +1,29 @@
+name: 2115
+dad: 
+  name: 2114
+  dad: 
+    name: 1709
+    dad: 
+      name: 1712
+    mom: 
+      name: 1711
+  mom: 
+    name: 1711
+    dad: 
+      name: 1724
+    mom: 
+      name: 1727
+mom: 
+  name: 2111
+  dad: 
+    name: 2110
+    dad: 
+      name: 2109
+    mom: 
+      name: 2106
+  mom: 
+    name: 1711
+    dad: 
+      name: 1724
+    mom: 
+      name: 1727

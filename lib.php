@@ -140,6 +140,9 @@ function triforms($tree){
 					$grouped[$k][] = cons($node, $vv);
 				}
 			}
+		}else{
+			unset($grouped[$k]);
+			$grouped[$k] = pairs($v);
 		}
 	}
 
@@ -155,6 +158,24 @@ function triforms($tree){
 
 	return $return;
 }
+
+function pairs($array){
+	//составляет все возможные комбинации из этого массива
+	$r = array();
+	$cnt = count($array);
+
+	foreach($array as $k=>$v){
+		$t = array();
+
+		for($i = $k+1 ; $i < $cnt; $i++){
+			$t = array($v);
+			$t[] = $array[$i];
+			$r[] = $t;
+		}
+	}
+	return $r;
+}
+
 
 function node($self = null){
 	return new Node($self);
