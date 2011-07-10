@@ -1,5 +1,5 @@
 <?php
-foreach(glob(__DIR__.'/helpers/*') as $v)
+foreach(glob(dirname(__FILE__).'/helpers/*') as $v)
 	require_once $v;
 
 function top_self($v, $vv){
